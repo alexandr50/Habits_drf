@@ -1,21 +1,46 @@
-from rest_framework.validators import ValidationError
+from rest_framework.exceptions import ValidationError
 
 
-def is_nice_validator(value):
+class IsNiceValidator:
     """валидация нп р=признак приятной привычки у связанной привычки"""
 
-    if value == False:
-        raise ValidationError("Связанная привычка может быть тоьлко приятной")
-    return value
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        is_nice = dict(value).get(self.field)
+        if not is_nice:
+            raise ValidationError("Связанная привычка может быть тоьлко приятной")
+
+# def is_nice_validator(value):
+#     """валидация нп р=признак приятной привычки у связанной привычки"""
+#
+#     if value == False:
+#         raise ValidationError("Связанная привычка может быть тоьлко приятной")
+#     return value
 
 
-def reward_and_is_nice_validator(obj):
+class RewardAndIsNiceValidator:
     """Валидация на признак полезности и вознаграждение у одной привычки сразу"""
 
-    if obj.is_nice + bool(obj.reward) == 2:
-        raise ValidationError('У привычки может быть или вознаграждение или признак приятной привычки')
+    def __init__(self, reward, is_nice):
+        self.reward = reward
+        self.is_nice = is_nice
+
+    def __call__(self, value):
+        reward = dict(value).get(self.reward)
+        is_nice = dict(value).get(self.is_nice)
+        if is_nice + bool(reward) == 2:
+            raise ValidationError('У привычки может быть или вознаграждение или признак приятной привычки')
 
 
-def is_to_long(run_time):
-    if run_time > 120:
-        raise ValidationError('Время выполнения привычки должно быть не больше 120 секунд')
+class IsSoLong:
+    """валидация продолжительности времени выполнения привычки"""
+
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        run_time: int = dict(value).get(self.field)
+        if run_time > 120:
+            raise ValidationError('Время выполнения привычки должно быть не больше 120 секунд')
