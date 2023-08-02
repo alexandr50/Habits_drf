@@ -4,7 +4,7 @@ from habits.models import Habit
 
 
 class RelatedHabit(models.Model):
-    habit = models.OneToOneField(Habit, on_delete=models.CASCADE, verbose_name='связанная привычка')
+    habit = models.OneToOneField(Habit, on_delete=models.CASCADE, verbose_name='главная привычка', related_name='related_habit')
     action = models.CharField(max_length=255, verbose_name='действие')
     is_nice = models.BooleanField(default=False, verbose_name='признак приятной привычки')
 
@@ -18,7 +18,8 @@ class RelatedHabit(models.Model):
 
     def save(self, *args, **kwargs):
         habit = Habit.objects.filter(id=self.habit_id).first()
-        if habit.is_nice or habit.reward:
-            raise Exception('Вы не можете создать связанную привычку так как уже получили вознаграждение или привычка уже приятная')
-        else:
-            super().save(*args, **kwargs)
+        if habit:
+            if habit.is_nice or habit.reward:
+                raise Exception('Вы не можете создать связанную привычку так как уже получили вознаграждение или привычка уже приятная')
+            else:
+                super().save(*args, **kwargs)
