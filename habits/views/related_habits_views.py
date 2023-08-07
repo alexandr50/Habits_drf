@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from habits.models import RelatedHabit
 from habits.serializers.related_habit_serializers import RelatedHabitSerializers, RelatedHabitCreateSerializers
-from users.permissions import IsOwner, IsRelatedhabitOwner
+from users.permissions import IsRelatedhabitOwner
 
 
 class RelatedHabitListView(generics.ListAPIView):

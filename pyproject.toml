@@ -15,6 +15,11 @@ psycopg2-binary = "^2.9.6"
 djangorestframework-simplejwt = "^5.2.2"
 django-cors-headers = "^4.2.0"
 drf-yasg = "^1.21.7"
+requests = "^2.31.0"
+celery = "^5.3.1"
+redis = "^4.6.0"
+django-celery-beat = "^2.5.0"
+flake8-for-pycharm = "^0.4.1"
 
 
 [build-system]

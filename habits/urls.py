@@ -12,5 +12,4 @@ urlpatterns = [
     path('related_habits/create/', RelatedHabitCreateView.as_view(), name='create_view'),
     path('related_habits/update/<int:pk>/', RelatedHabitUpdateView.as_view(), name='update_view'),
     path('related_habits/delete/<int:pk>/', RelatedHabitDeleteView.as_view(), name='delete_view'),
-
 ]

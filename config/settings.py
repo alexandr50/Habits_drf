@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg',
+    'django_celery_beat',
 
     'habits',
     'users',
@@ -143,7 +144,7 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -158,10 +159,38 @@ SIMPLE_JWT = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    "https://read-only.example.com",
-    "https://read-and-write.example.com",
+    "http://localhost:8000",
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://read-and-write.example.com",
+    "http://localhost:8000",
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+# Часовой пояс для работы Celery
+CELERY_TIMEZONE = "Australia/Tasmania"
+
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
+
+# Максимальное время на выполнение задачи
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+
+TOKEN_BOT = os.getenv('TOKEN_BOT')
+CHAT_ID = os.getenv('CHAT_ID')
+
+
+
+CELERY_BEAT_SCHEDULE = {
+    'getUpdate HabitBot': {
+        'task': 'users.tasks.get_updates_bot',
+        'schedule': timedelta(seconds=5),
+    }
+
+}

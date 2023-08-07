@@ -1,19 +1,16 @@
-
 from rest_framework import serializers
-from rest_framework.fields import SerializerMethodField
 
 from habits.models import RelatedHabit
 from habits.validators import IsNiceValidator
 
 
 class RelatedHabitSerializers(serializers.ModelSerializer):
-
     class Meta:
         model = RelatedHabit
         fields = ('action',)
 
-class RelatedHabitCreateSerializers(serializers.ModelSerializer):
 
+class RelatedHabitCreateSerializers(serializers.ModelSerializer):
     class Meta:
         model = RelatedHabit
         fields = '__all__'
