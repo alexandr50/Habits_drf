@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.fields import SerializerMethodField
 
 from habits.models import Habit, RelatedHabit
 from habits.serializers.related_habit_serializers import RelatedHabitSerializers
@@ -24,4 +23,5 @@ class HabitListSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Habit
-        fields = ("id", "place", "moment", "action", "is_nice", "reward", "interval", "run_time", "owner", 'related_habit')
+        fields = ("id", "place", "moment", "action", "is_nice", "reward",
+                  "interval", "run_time", "owner", 'related_habit')

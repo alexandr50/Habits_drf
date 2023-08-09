@@ -1,16 +1,9 @@
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-
-import django
-django.setup()
-
-from users.models import User
 import requests
+
 from config import settings
+from users.models import User
 
 token = settings.TOKEN_BOT
-chat_id = settings.CHAT_ID
-
 
 
 def get_new_user_chat_id(telegram):
@@ -33,12 +26,8 @@ def set_new_user_chat_id(chat_id, telegram):
     user.save()
 
 
-
-
 def get_welcome(chat_id):
     user = User.objects.get(chat_id=chat_id)
     message = f"Приветсвую, {user.telegram}, здесь будут напоминания ваших привычек"
     url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={message}"
-    request = requests.post(url)
-
-
+    requests.post(url)

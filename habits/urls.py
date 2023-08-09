@@ -1,7 +1,10 @@
 from django.urls import path
 
+from habits.apps import HabitsConfig
 from habits.views import HabitsListView, HabitCreateView, HabitUpdateView, HabitDeleteView, RelatedHabitListView
 from habits.views.related_habits_views import RelatedHabitCreateView, RelatedHabitDeleteView, RelatedHabitUpdateView
+
+app_name = HabitsConfig.name
 
 urlpatterns = [
     path('', HabitsListView.as_view(), name='list_view'),

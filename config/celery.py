@@ -1,9 +1,6 @@
 import os
-import sys
-from pathlib import Path
 
 from celery import Celery
-from django.core.management import execute_from_command_line
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -21,5 +18,3 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
-
-
