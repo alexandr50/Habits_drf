@@ -42,6 +42,11 @@ Habits_drf это django-rest-framework проект. Проект создан 
     найти в Telegram bot @DifferHabitsBot
     нажать /start'. В течении 5-10 секунд придет приветственное сообщение. Далее, ежедневно пользователь будет получать напоминания привычках к исполнению.
 
+Технологии и стек:
+
+        python, django, djangorestframework, python-dotenv, psycopg2-binary, djangorestframework-simplejwt, django-cors-headers,
+        drf-yasg, requests, celery, redis, django-celery-beat, flake8-for-pycharm
+
 Безопасность
 
      Для проекта настроен CORS, чтобы фронтенд мог подключаться к проекту на развернутом сервере.
