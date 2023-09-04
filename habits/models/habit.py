@@ -26,7 +26,7 @@ class Habit(models.Model):
     action = models.CharField(max_length=255, verbose_name='действие')
     is_nice = models.BooleanField(default=False, verbose_name='признак приятной привычки')
     reward = models.CharField(max_length=50, verbose_name='вознаграждение', blank=True, null=True)
-    interval = models.CharField(choices=INTERVAL_CHOICES, default=ONE_A_DAY, verbose_name='периодичность выполнения')
+    interval = models.CharField(choices=INTERVAL_CHOICES, max_length=30,  default=ONE_A_DAY, verbose_name='периодичность выполнения')
     run_time = models.IntegerField(default=120, verbose_name='время выполнения в секундах')
     is_published = models.BooleanField(default=False, verbose_name='опубликованно')
 
